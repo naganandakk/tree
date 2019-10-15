@@ -9,7 +9,8 @@ class Tree:
     options = {
         "all": False,
         "level": math.inf,
-        "dirOnly": False
+        "dirOnly": False,
+        "fullPathPrefix": False
     }
 
     def __init__(self, dirName, options={}):
@@ -84,6 +85,7 @@ class Tree:
             isLastEntry = True if (index + 1) == entriesLength else False
             isReadable = os.access(entry.__str__(), os.R_OK)
             errorMessage = "[error opening dir]" if entry.is_dir() and not os.access(entry.__str__(), os.R_OK) and not isLastLevel else ""
+            entryName = entry if self.options["fullPathPrefix"] else entry.name
 
             # Print spaces or vertical lines
             if parents is None:
@@ -97,7 +99,7 @@ class Tree:
             
             # Print entry name
             print("└── ", end="") if isLastEntry else print("├── ", end="")
-            print("%s %s" % (entry.name, errorMessage))
+            print("%s %s" % (entryName, errorMessage))
 
             # Update completedDirectoryPaths
             if isLastEntry:
@@ -113,6 +115,7 @@ def parseArguments():
     parser.add_argument('-a', action="store_true", default=False, dest="all", help="include hidden entries")
     parser.add_argument('-d', action="store_true", default=False, dest="dirOnly", help="list only directories")
     parser.add_argument('-L', action="store", dest="level", default=math.inf, type=int, help="maximum level to traverse")
+    parser.add_argument('-f', action="store_true", dest="fullPathPrefix", default=False, help="print full path prefix")
 
     options, dirs = parser.parse_known_args()
 
