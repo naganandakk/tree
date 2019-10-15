@@ -35,12 +35,12 @@ class Tree:
         
         # Check whether the path exists
         if path.exists() is False:
-            print("%s: Path not found" % dir)
+            print("%s: Path not found" % self.dirName)
             return
 
         # Check whether the path is a directory
         if path.is_dir() is False:
-            print("%s [error opening dir]" % dir)
+            print("%s [error opening dir]" % self.dirName)
             return
 
         print(self.dirName)
