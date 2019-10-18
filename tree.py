@@ -29,19 +29,19 @@ class Tree:
             self.fileCount += 1
     
     def summary(self):
-        print("%d directories, %d files" %(self.dirCount, self.fileCount))
+        print(f"{self.dirCount} directories, {self.fileCount} files")
     
     def traverse(self):
         path = Path(self.dirName)
         
         # Check whether the path exists
         if path.exists() is False:
-            print("%s: Path not found" % self.dirName)
+            print(f"{self.dirName}: Path not found")
             return
 
         # Check whether the path is a directory
         if path.is_dir() is False:
-            print("%s [error opening dir]" % self.dirName)
+            print(f"{self.dirName} [error opening dir]")
             return
 
         print(self.dirName)
@@ -99,7 +99,7 @@ class Tree:
             
             # Print entry name
             print("└── ", end="") if isLastEntry else print("├── ", end="")
-            print("%s %s" % (entryName, errorMessage))
+            print(f"{entryName} {errorMessage}")
 
             # Update completedDirectoryPaths
             if isLastEntry:
